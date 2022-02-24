@@ -18,7 +18,8 @@
 #include "R3BAlpideMappedData.h"
 
 R3BAlpideMappedData::R3BAlpideMappedData()
-    : fSenId(0)
+    : fDetId(0)
+    , fChip(0)
     , fReg(0)
     , fAds(0)
     , fChip(0)
@@ -27,13 +28,9 @@ R3BAlpideMappedData::R3BAlpideMappedData()
 {
 }
 
-R3BAlpideMappedData::R3BAlpideMappedData(UShort_t senId,
-                                         UShort_t reg,
-                                         UShort_t ads,
-                                         UShort_t chip,
-                                         UShort_t row,
-                                         UShort_t col)
-    : fSenId(senId)
+R3BAlpideMappedData::R3BAlpideMappedData(UShort_t detId, UShort_t chip, UShort_t reg, UShort_t col, UShort_t ads)
+    : fDetId(detId)
+    , fChip(chip)
     , fReg(reg)
     , fAds(ads)
     , fChip(chip)

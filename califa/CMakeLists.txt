@@ -68,6 +68,7 @@ set(SRCS
 ./online/R3BCalifaJulichOnlineSpectra.cxx
 ./online/R3BCalifaDemoOnlineSpectra.cxx
 ./ana/R3BCalifaCrystalCalDataAnalysis.cxx
+./ana/R3BCalifaP2pAnalysis.cxx
 )
 
 # fill list of header files from list of source files

@@ -39,5 +39,6 @@
 #pragma link C++ class R3BCalifaOnlineSpectra+;
 #pragma link C++ class R3BCalifaJulichOnlineSpectra+;
 #pragma link C++ class R3BCalifaDemoOnlineSpectra+;
+#pragma link C++ class R3BCalifaP2pAnalysis+;
 
 #endif

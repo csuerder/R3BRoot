@@ -11,34 +11,44 @@
  * or submit itself to any jurisdiction.                                      *
  ******************************************************************************/
 
-// -------------------------------------------------------------------------
-// -----                      R3BTwimMappedData source file            -----
-// -------------------------------------------------------------------------
+#include "R3BCalifaP2pData.h"
 
-#include "R3BTwimMappedData.h"
-
-// -----   Default constructor   -------------------------------------------
-R3BTwimMappedData::R3BTwimMappedData()
-    : fSecID(0)
-    , fAnodeID(0)
+R3BCalifaP2pData::R3BCalifaP2pData()
+    : fEnergy1(NAN)
+    , fEnergy2(NAN)
+    , fPhi1(NAN)
+    , fPhi2(NAN)
+    , fTheta1(NAN)
+    , fTheta2(NAN)
     , fTime(0)
-    , fEnergy(0)
-    , fPileup(kFALSE)
-    , fOverflow(kFALSE)
+    , fThetaSum(0.)
+    , fPhiSum(0.)
+    , fEnergySum(0.)
 {
 }
-// -------------------------------------------------------------------------
 
-// -----   Standard constructor   ------------------------------------------
-R3BTwimMappedData::R3BTwimMappedData(UInt_t secID, UInt_t anodeID, Int_t time, Int_t energy, Bool_t pu, Bool_t ov)
-    : fSecID(secID)
-    , fAnodeID(anodeID)
+R3BCalifaP2pData::R3BCalifaP2pData(Double_t ene1, 
+                                    Double_t ene2, 
+                                    Double_t eneSum, 
+                                    Double_t phi1, 
+                                    Double_t phi2, 
+                                    Double_t phiSum, 
+                                    Double_t theta1, 
+                                    Double_t theta2, 
+                                    Double_t thetaSum, 
+                                    ULong64_t time)
+    : fEnergy1(ene1)
+    , fEnergy2(ene2)
+    , fPhi1(phi1)
+    , fPhi2(phi2)
+    , fTheta1(theta1)
+    , fTheta2(theta2)
     , fTime(time)
-    , fEnergy(energy)
-    , fPileup(pu)
-    , fOverflow(ov)
+    , fThetaSum(thetaSum)
+    , fPhiSum(phiSum)
+    , fEnergySum(eneSum)
 {
 }
-// -------------------------------------------------------------------------
 
-ClassImp(R3BTwimMappedData);
+
+ClassImp(R3BCalifaP2pData);

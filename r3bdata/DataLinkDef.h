@@ -32,6 +32,8 @@
 #pragma link C++ class R3BCalifaCrystalCalData+;
 #pragma link C++ class R3BCalifaHitData+;
 #pragma link C++ class R3BCalifaPoint+;
+#pragma link C++ class R3BCalifaP2pData+;
+
 #pragma link C++ class R3BDchPoint+;
 #pragma link C++ class R3BDchFullPoint+;
 #pragma link C++ class R3BDchDigi+;
@@ -76,20 +78,6 @@
 #pragma link C++ class R3BMusicMappedData+;
 #pragma link C++ class R3BMusicCalData+;
 #pragma link C++ class R3BMusicHitData+;
-
-#pragma link C++ class R3BMwpcMappedData+;
-#pragma link C++ class R3BMwpcCalData+;
-#pragma link C++ class R3BMwpcHitData+;
-#pragma link C++ class R3BMwpcPoint+;
-
-#pragma link C++ class R3BTwimMappedData+;
-#pragma link C++ class R3BTwimCalData+;
-#pragma link C++ class R3BTwimHitData+;
-#pragma link C++ class R3BTwimPoint+;
-
-#pragma link C++ class R3BMusliMappedData+;
-#pragma link C++ class R3BMusliCalData+;
-#pragma link C++ class R3BMusliHitData+;
 
 #pragma link C++ class R3BStartrackerDigitHit+;
 #pragma link C++ class R3BStartrackMappedData+;

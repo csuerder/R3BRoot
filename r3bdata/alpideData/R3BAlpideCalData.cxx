@@ -18,16 +18,16 @@
 #include "R3BAlpideCalData.h"
 
 R3BAlpideCalData::R3BAlpideCalData()
-    : fSenId(0)
-    , fCol(0)
-    , fRow(0)
+    : fDetId(0)
+    , fPosl(-4.0)
+    , fPost(-4.0)
 {
 }
 
-R3BAlpideCalData::R3BAlpideCalData(UShort_t senId, Int_t col, Int_t row)
-    : fSenId(senId)
-    , fCol(col)
-    , fRow(row)
+R3BAlpideCalData::R3BAlpideCalData(UShort_t detId, Float_t posl, Float_t post)
+    : fDetId(detId)
+    , fPosl(posl)
+    , fPost(post)
 {
 }
 
