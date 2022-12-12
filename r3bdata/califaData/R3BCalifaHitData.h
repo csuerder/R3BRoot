@@ -18,6 +18,7 @@
 
 #include "FairMultiLinkedData.h"
 #include "R3BCalifaCrystalCalData.h"
+#include <TVector3.h>
 
 class R3BCalifaHitData : public FairMultiLinkedData
 {
@@ -94,6 +95,11 @@ class R3BCalifaHitData : public FairMultiLinkedData
     Double_t fPhi;           // reconstructed phi
     ULong64_t fTime;         // WR time stamp
     uint32_t fClusterId;
+   
+  public:
+    TVector3 fBeta {NAN, NAN, NAN};
+    TVector3 fDirCM {NAN, NAN, NAN};
+    Double_t fEnCMS {NAN};
 
     ClassDef(R3BCalifaHitData, 3)
 };
