@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -43,23 +43,24 @@ R3BAlpideDigitizer::R3BAlpideDigitizer()
 R3BAlpideDigitizer::R3BAlpideDigitizer(const TString& name, Int_t iVerbose)
     : FairTask(name + "Digitizer", iVerbose)
     , fName(name)
-    , fGeoversion(2022)
-    , fMCTrack(NULL)
-    , fAlpidePoints(NULL)
-    , fAlpideHits(NULL)
-    , fAlpideGeo(NULL)
-    , fMappingPar(NULL)
+    , fGeoversion(2024)
+    , fMCTrack(nullptr)
+    , fAlpidePoints(nullptr)
+    , fAlpideHits(nullptr)
+    , fAlpideGeo(nullptr)
+    , fMappingPar(nullptr)
     , fLabframe(false)
-    , fsigma(0.0005) // cm
+    , fsigma(0.0005) // in cm
 {
 }
 
 // Virtual R3BAlpideDigitizer: Destructor ----------------------------
 R3BAlpideDigitizer::~R3BAlpideDigitizer()
 {
-    R3BLOG(debug, "");
+    R3BLOG(debug1, "");
     if (fAlpideHits)
     {
+        fAlpideHits->Delete();
         delete fAlpideHits;
     }
 }
@@ -67,9 +68,9 @@ R3BAlpideDigitizer::~R3BAlpideDigitizer()
 void R3BAlpideDigitizer::SetParContainers()
 {
     FairRuntimeDb* rtdb = FairRuntimeDb::instance();
-    fMappingPar = (R3BAlpideMappingPar*)rtdb->getContainer("alpideMappingPar");
-    R3BLOG_IF(warning, !fMappingPar, "Could not get access to alpideMappingPar");
-    R3BLOG_IF(warning, fMappingPar, "Container alpideMappingPar found.");
+    fMappingPar = dynamic_cast<R3BAlpideMappingPar*>(rtdb->getContainer("alpideMappingPar"));
+    R3BLOG_IF(warn, !fMappingPar, "Could not get access to alpideMappingPar");
+    R3BLOG_IF(info, fMappingPar, "Container alpideMappingPar found.");
 }
 
 void R3BAlpideDigitizer::SetParameter()
@@ -90,8 +91,8 @@ InitStatus R3BAlpideDigitizer::Init()
     FairRootManager* ioman = FairRootManager::Instance();
     R3BLOG_IF(fatal, !ioman, "FairRootManager not found.");
 
-    fMCTrack = (TClonesArray*)ioman->GetObject("MCTrack");
-    fAlpidePoints = (TClonesArray*)ioman->GetObject(fName + "Point");
+    fMCTrack = static_cast<TClonesArray*>(ioman->GetObject("MCTrack"));
+    fAlpidePoints = dynamic_cast<TClonesArray*>(ioman->GetObject(fName + "Point"));
     R3BLOG_IF(fatal, !fAlpidePoints, fName << "Point not found.");
 
     // Register output array fAlpideHits
@@ -124,7 +125,7 @@ void R3BAlpideDigitizer::Exec(Option_t* opt)
     for (Int_t i = 0; i < nHits; i++)
     {
         fRot.SetToIdentity();
-        pointData[i] = (R3BAlpidePoint*)(fAlpidePoints->At(i));
+        pointData[i] = dynamic_cast<R3BAlpidePoint*>(fAlpidePoints->At(i));
         TrackId = pointData[i]->GetTrackID();
         auto sid = pointData[i]->GetSensorID();
 
@@ -174,7 +175,7 @@ void R3BAlpideDigitizer::Exec(Option_t* opt)
     {
         delete[] pointData;
     }
-    LOG(info) << "R3BAlpideDigitizer: " << fAlpideHits->GetEntriesFast() << " points registered in this event";
+    R3BLOG(info, fAlpideHits->GetEntriesFast() << " points registered in this event");
     return;
 }
 

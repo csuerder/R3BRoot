@@ -1,6 +1,6 @@
 ##############################################################################
 #   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    #
-#   Copyright (C) 2019 Members of R3B Collaboration                          #
+#   Copyright (C) 2019-2023 Members of R3B Collaboration                     #
 #                                                                            #
 #             This software is distributed under the terms of the            #
 #                 GNU General Public Licence (GPL) version 3,                #
@@ -30,7 +30,9 @@ include_directories(
     ${R3BROOT_SOURCE_DIR}/r3bdata/alpideData
     ${R3BROOT_SOURCE_DIR}/alpide
     ${R3BROOT_SOURCE_DIR}/alpide/sim
+    ${R3BROOT_SOURCE_DIR}/alpide/digi
     ${R3BROOT_SOURCE_DIR}/alpide/pars
+    ${R3BROOT_SOURCE_DIR}/alpide/geo
     )
 
 link_directories(${GTEST_LIBS_DIR} ${ROOT_LIBRARY_DIR} ${FAIRROOT_LIBRARY_DIR}

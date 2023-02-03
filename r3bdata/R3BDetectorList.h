@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -129,7 +129,17 @@ enum fDetectorType
     kFI33Point,
     kSFIPoint,
     kMUSICPoint,
+<<<<<<< HEAD
     kRpcPoint
+=======
+    kLOSPoint,
+    kRpcPoint,
+    kSOFMWPC0Point,
+    kSOFMWPC1Point,
+    kSOFTWIMPoint,
+    kSOFMWPC2Point,
+    kSOFMWPC3Point
+>>>>>>> de1bd476d3b4844ecdcb335e093f196c76ebcd7a
 #ifdef SOFIA
     ,
     kSOFSCIPoint,

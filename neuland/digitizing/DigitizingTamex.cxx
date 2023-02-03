@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -131,18 +131,15 @@ namespace Neuland
         while (it != fTmxPeaks.end())
         {
             Int_t i = 0;
-            it = std::find_if(fTmxPeaks.begin(),
-                              fTmxPeaks.end(),
-                              [&](const TmxPeak& p)
-                              {
-                                  bool res = false;
-                                  if (index != i)
-                                  {
-                                      res = (p == fTmxPeaks[index]);
-                                  }
-                                  i++;
-                                  return res;
-                              });
+            it = std::find_if(fTmxPeaks.begin(), fTmxPeaks.end(), [&](const TmxPeak& p) {
+                bool res = false;
+                if (index != i)
+                {
+                    res = (p == fTmxPeaks[index]);
+                }
+                i++;
+                return res;
+            });
 
             if (it == fTmxPeaks.end())
                 continue;
@@ -218,10 +215,9 @@ namespace Neuland
         auto signals = std::vector<Signal>{};
         signals.reserve(fTmxPeaks.size());
 
-        std::transform(fTmxPeaks.begin(),
-                       fTmxPeaks.end(),
-                       std::back_inserter(signals),
-                       [](TmxPeak& peak) { return static_cast<Signal>(peak); });
+        std::transform(fTmxPeaks.begin(), fTmxPeaks.end(), std::back_inserter(signals), [](TmxPeak& peak) {
+            return static_cast<Signal>(peak);
+        });
         RemoveZero(signals);
         fSignals.set(std::move(signals));
     }
@@ -269,9 +265,8 @@ namespace Neuland
         if (!fTrigTime.valid())
         {
             auto signals = GetSignals();
-            auto it = std::min_element(signals.begin(), signals.end(), [](const Signal& l, const Signal& r) {
-                return l.tdc < r.tdc;
-            });
+            auto it = std::min_element(
+                signals.begin(), signals.end(), [](const Signal& l, const Signal& r) { return l.tdc < r.tdc; });
             fTrigTime.set(it->tdc);
         }
         return fTrigTime.get();

@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -126,13 +126,15 @@ void R3BNeulandDigitizer::Exec(Option_t*)
     // Fill control histograms
     hMultOne->Fill(std::count_if(paddles.begin(),
                                  paddles.end(),
-                                 [](const std::pair<const Int_t, std::unique_ptr<Neuland::Digitizing::Paddle>>& kv)
-                                 { return kv.second->HasHalfFired(); }));
+                                 [](const std::pair<const Int_t, std::unique_ptr<Neuland::Digitizing::Paddle>>& kv) {
+                                     return kv.second->HasHalfFired();
+                                 }));
 
     hMultTwo->Fill(std::count_if(paddles.begin(),
                                  paddles.end(),
-                                 [](const std::pair<const Int_t, std::unique_ptr<Neuland::Digitizing::Paddle>>& kv)
-                                 { return kv.second->HasFired(); }));
+                                 [](const std::pair<const Int_t, std::unique_ptr<Neuland::Digitizing::Paddle>>& kv) {
+                                     return kv.second->HasFired();
+                                 }));
 
     // Create Hits
     for (const auto& kv : paddles)

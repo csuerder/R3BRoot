@@ -1,6 +1,6 @@
 ##############################################################################
 #   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    #
-#   Copyright (C) 2019 Members of R3B Collaboration                          #
+#   Copyright (C) 2019-2023 Members of R3B Collaboration                     #
 #                                                                            #
 #             This software is distributed under the terms of the            #
 #                 GNU General Public Licence (GPL) version 3,                #
@@ -78,7 +78,7 @@ xballData/R3BXBallCrystalHit.cxx
 xballData/R3BXBallCrystalHitSim.cxx
 califaData/R3BCalifaCrystalCalData.cxx
 califaData/R3BCalifaMappedData.cxx
-califaData/R3BCalifaHitData.cxx
+califaData/R3BCalifaClusterData.cxx
 califaData/R3BCalifaPoint.cxx
 califaData/R3BCalifaP2pData.cxx
 dchData/R3BDchPoint.cxx

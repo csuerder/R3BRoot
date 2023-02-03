@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -26,7 +26,7 @@
 R3BAlpideMappingPar::R3BAlpideMappingPar(const char* name, const char* title, const char* context)
     : FairParGenericSet(name, title, context)
     , fNbSensors(363)
-    , fGeoVersion(2022)
+    , fGeoVersion(2024)
     , fAlpideCols(DAlpideCols)
     , fAlpideRows(DAlpideRows)
 {
@@ -42,10 +42,7 @@ R3BAlpideMappingPar::R3BAlpideMappingPar(const char* name, const char* title, co
 }
 
 // ----  Destructor ------------------------------------------------------------
-R3BAlpideMappingPar::~R3BAlpideMappingPar() 
-{ 
-    clear();
-}
+R3BAlpideMappingPar::~R3BAlpideMappingPar() { clear(); }
 
 // ----  Method SetNbSensors ---------------------------------------------------
 void R3BAlpideMappingPar::SetNbSensors(Int_t n)
@@ -98,7 +95,7 @@ void R3BAlpideMappingPar::putParams(FairParamList* list)
 // ----  Method getParams ------------------------------------------------------
 Bool_t R3BAlpideMappingPar::getParams(FairParamList* list)
 {
-    R3BLOG(INFO, "called");
+    R3BLOG(info, "called");
     if (!list)
     {
         R3BLOG(fatal, "Could not initialize FairParamList");

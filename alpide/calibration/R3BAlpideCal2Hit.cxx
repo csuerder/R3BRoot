@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -64,7 +64,7 @@ R3BAlpideCal2Hit::R3BAlpideCal2Hit(const TString& name, Int_t iVerbose)
 // Virtual R3BAlpideCal2Hit::Destructor
 R3BAlpideCal2Hit::~R3BAlpideCal2Hit()
 {
-    R3BLOG(debug, "");
+    R3BLOG(debug1, "");
     if (fAlpideCluster)
     {
         delete fAlpideCluster;
@@ -117,7 +117,7 @@ void R3BAlpideCal2Hit::SetParameter()
 // -----   Public method Init   --------------------------------------------
 InitStatus R3BAlpideCal2Hit::Init()
 {
-    R3BLOG(INFO, "");
+    R3BLOG(info, "");
     FairRootManager* mgr = FairRootManager::Instance();
     if (!mgr)
     {

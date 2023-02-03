@@ -1,6 +1,6 @@
 ##############################################################################
 #   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    #
-#   Copyright (C) 2019 Members of R3B Collaboration                          #
+#   Copyright (C) 2019-2023 Members of R3B Collaboration                     #
 #                                                                            #
 #             This software is distributed under the terms of the            #
 #                 GNU General Public Licence (GPL) version 3,                #
@@ -11,18 +11,16 @@
 # or submit itself to any jurisdiction.                                      #
 ##############################################################################
 
-cmake_minimum_required(VERSION 3.0)
-
 if(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/twinmusic_v22.geo.root")
 message(STATUS "Starting to generate the standard root geometry for the Twin-Music")
-execute_process(COMMAND root -l ${R3BROOT_SOURCE_DIR}/twim/geobase/create_twin_geo.C)
+execute_process(COMMAND root -l -q -x ${R3BROOT_SOURCE_DIR}/twim/geobase/create_twin_geo.C)
 message(STATUS "${BYellow}Twin-Music standard root geometry has been created${CR} ")
 else(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/twinmusic_v22.geo.root")
 message(STATUS "${BYellow}Twin-Music standard root geometry already created${CR} ")
 endif(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/twinmusic_v22.geo.root")
 
 enable_testing()
-#set(PROJECT_TEST_NAME TwimUnitTests)
+
 set(GTEST_ROOT ${SIMPATH})
 find_package(GTest)
 
@@ -33,7 +31,6 @@ include_directories(
     ${SYSTEM_INCLUDE_DIRECTORIES}
     ${BASE_INCLUDE_DIRECTORIES}
     ${R3BROOT_SOURCE_DIR}/r3bbase
-    ${R3BROOT_SOURCE_DIR}/r3bdata
     ${R3BROOT_SOURCE_DIR}/twim/geobase
     )
 
@@ -44,7 +41,6 @@ set(TEST_DEPENDENCIES
     ${GTEST_BOTH_LIBRARIES}
     ${ROOT_LIBRARIES}
     FairTools
-    R3BData
     R3BTwim
     ParBase
     GeoBase)

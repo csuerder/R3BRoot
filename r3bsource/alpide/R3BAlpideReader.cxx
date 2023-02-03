@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -45,7 +45,7 @@ R3BAlpideReader::R3BAlpideReader(EXT_STR_h101_ALPIDE_onion* data, size_t offset)
 
 R3BAlpideReader::~R3BAlpideReader()
 {
-    R3BLOG(DEBUG1, "");
+    R3BLOG(debug1, "");
     if (fArray)
     {
         delete fArray;
@@ -55,10 +55,10 @@ R3BAlpideReader::~R3BAlpideReader()
 Bool_t R3BAlpideReader::Init(ext_data_struct_info* a_struct_info)
 {
     Int_t ok;
-    R3BLOG(INFO, "");
+    R3BLOG(info, "");
     EXT_STR_h101_ALPIDE_ITEMS_INFO(ok, *a_struct_info, fOffset, EXT_STR_h101_ALPIDE, 0);
 
-    R3BLOG_IF(FATAL, !ok, "Failed to setup structure information.");
+    R3BLOG_IF(fatal, !ok, "Failed to setup structure information.");
 
     // Register output array in tree
     FairRootManager::Instance()->Register("AlpideMappedData", "ALPIDE_Map", fArray, !fOnline);
@@ -70,26 +70,26 @@ Bool_t R3BAlpideReader::Init(ext_data_struct_info* a_struct_info)
 
 Bool_t R3BAlpideReader::Read()
 {
-    R3BLOG(DEBUG1, "Event data: " << fNEvent);
+    R3BLOG(debug1, "Event data: " << fNEvent);
 
     for (int d = 0; d < fNbDet; d++)
     {
-        R3BLOG_IF(ERROR,
+        R3BLOG_IF(error,
                   fData->ALPIDE[d].REGION != fData->ALPIDE[d].ADDRESS,
                   "Region/Address sizes mismatch for detector " << d + 1 << ", Region: " << fData->ALPIDE[d].REGION
                                                                 << " , Address: " << fData->ALPIDE[d].ADDRESS);
 
-        R3BLOG_IF(ERROR,
+        R3BLOG_IF(error,
                   fData->ALPIDE[d].ROW != fData->ALPIDE[d].COL,
                   "Row/Col sizes mismatch for detector " << d + 1 << ", Row: " << fData->ALPIDE[d].ROW
                                                          << " , Col: " << fData->ALPIDE[d].COL);
 
-        R3BLOG_IF(ERROR,
+        R3BLOG_IF(error,
                   fData->ALPIDE[d].CHIP != fData->ALPIDE[d].ROW,
                   "Chip/Row sizes mismatch for detector " << d + 1 << ", Chip: " << fData->ALPIDE[d].CHIP
                                                           << " , Row: " << fData->ALPIDE[d].ROW);
 
-        R3BLOG_IF(ERROR,
+        R3BLOG_IF(error,
                   fData->ALPIDE[d].CHIP != fData->ALPIDE[d].COL,
                   "Chip/Col sizes mismatch for detector " << d + 1 << ", Chip: " << fData->ALPIDE[d].CHIP
                                                           << " , Col: " << fData->ALPIDE[d].COL);
@@ -102,7 +102,7 @@ Bool_t R3BAlpideReader::Read()
         for (int r = 0; r < fData->ALPIDE[d].ROW; r++)
         {
 
-            //  R3BLOG(DEBUG1,"det: "<<d+1 <<", region: "<<fData->ALPIDE[d].REGIONv[fData->ALPIDE[d].REGION-1]<< " ,
+            //  R3BLOG(debug1,"det: "<<d+1 <<", region: "<<fData->ALPIDE[d].REGIONv[fData->ALPIDE[d].REGION-1]<< " ,
             //  ads: " << fData->ALPIDE[d].ADDRESSv[fData->ALPIDE[d].ADDRESS-1]<< " , row: "<<
             //  fData->ALPIDE[d].ROWv[r]<<" , col: "<< fData->ALPIDE[d].COLv[r]);
 

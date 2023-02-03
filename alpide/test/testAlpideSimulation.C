@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -11,6 +11,11 @@
  * or submit itself to any jurisdiction.                                      *
  ******************************************************************************/
 
+#include <TStopwatch.h>
+#include <TString.h>
+#include <TSystem.h>
+#include <memory>
+
 void testAlpideSimulation(int nbevents = 100)
 {
     // Timer
@@ -18,8 +23,10 @@ void testAlpideSimulation(int nbevents = 100)
     timer.Start();
 
     // Logging
-    FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+    auto logger = FairLogger::GetLogger();
+    logger->SetLogVerbosityLevel("low");
+    logger->SetLogScreenLevel("warn");
+    logger->SetColoredLog(true);
 
     // System paths
     const TString workDirectory = getenv("VMCWORKDIR");
@@ -27,7 +34,7 @@ void testAlpideSimulation(int nbevents = 100)
     gSystem->Setenv("CONFIG_DIR", workDirectory + "/gconfig");
 
     // Output files
-    // const TString simufile = "test.simu.root";
+    const TString simufile = "test.simu.root";
     // const TString parafile = "test.para.root";
 
     // Basic simulation setup
@@ -35,12 +42,12 @@ void testAlpideSimulation(int nbevents = 100)
     run->SetName("TGeant4");
     run->SetStoreTraj(false);
     run->SetMaterials("media_r3b.geo");
-    // run->SetSink(new FairRootFileSink(simufile));
+    run->SetSink(new FairRootFileSink(simufile));
 
     // Primary particle generator
-    auto boxGen = new FairBoxGenerator(2212, 4);
+    auto boxGen = new FairBoxGenerator(2212, 8);
     boxGen->SetXYZ(0, 0, 0.);
-    boxGen->SetThetaRange(0., 3.);
+    boxGen->SetThetaRange(7., 90.);
     boxGen->SetPhiRange(0., 360.);
     boxGen->SetEkinRange(0.6, 0.6);
     auto primGen = new FairPrimaryGenerator();
@@ -55,6 +62,11 @@ void testAlpideSimulation(int nbevents = 100)
     // Geometry: Alpide
     run->AddModule(new R3BAlpide("target_area_alpide_twoarms_v24.geo.root", { 0., 0., 0. }));
 
+    // Digitizer: Alpide
+    auto digi = new R3BAlpideDigitizer("Alpide");
+    digi->SetLabframe();
+    run->AddTask(digi);
+
     // Init
     run->Init();
 
@@ -63,7 +75,6 @@ void testAlpideSimulation(int nbevents = 100)
 
     // Report
     timer.Stop();
-    std::cout << "Macro finished successfully." << std::endl;
     std::cout << "Real time: " << timer.RealTime() << "s, CPU time: " << timer.CpuTime() << "s" << std::endl;
-    gApplication->Terminate();
+    std::cout << "Macro finished successfully." << std::endl;
 }

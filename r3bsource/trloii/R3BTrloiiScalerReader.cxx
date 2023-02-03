@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -44,7 +44,7 @@ R3BTrloiiScalerReader::R3BTrloiiScalerReader(EXT_STR_h101_TRLO_onion* data, size
 
 R3BTrloiiScalerReader::~R3BTrloiiScalerReader()
 {
-    R3BLOG(DEBUG1, "");
+    R3BLOG(debug1, "");
     if (fArray)
         delete fArray;
 }
@@ -52,12 +52,12 @@ R3BTrloiiScalerReader::~R3BTrloiiScalerReader()
 Bool_t R3BTrloiiScalerReader::Init(ext_data_struct_info* a_struct_info)
 {
     Int_t ok;
-    R3BLOG(INFO, "");
+    R3BLOG(info, "");
     EXT_STR_h101_TRLO_ITEMS_INFO(ok, *a_struct_info, fOffset, EXT_STR_h101_TRLO, 0);
 
     if (!ok)
     {
-        R3BLOG(ERROR, "Failed to setup structure information");
+        R3BLOG(error, "Failed to setup structure information");
         return kFALSE;
     }
 
@@ -71,7 +71,7 @@ Bool_t R3BTrloiiScalerReader::Init(ext_data_struct_info* a_struct_info)
 
 Bool_t R3BTrloiiScalerReader::Read()
 {
-    R3BLOG(DEBUG1, "Event data");
+    R3BLOG(debug1, "Event data");
 
     for (int ch = 0; ch < 16; ++ch)
     {

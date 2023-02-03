@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -49,7 +49,7 @@ bool R3BAlpideGeometry::Init(Int_t version)
     else
         return kTRUE;
 
-    R3BLOG(INFO, "");
+    R3BLOG(info, "");
     TString geoPath = gSystem->Getenv("VMCWORKDIR");
     geoPath += "/geometry/";
 
@@ -97,7 +97,7 @@ bool R3BAlpideGeometry::Init(Int_t version)
     }
 
     // Stand alone mode
-    R3BLOG(INFO, "Open geometry file " << geoPath << " for analysis.");
+    R3BLOG(info, "Open geometry file " << geoPath << " for analysis.");
     f = new TFile(geoPath, "READ");
     TGeoVolume* v = dynamic_cast<TGeoVolume*>(f->Get("TOP"));
     if (!v)
@@ -315,7 +315,7 @@ const char* R3BAlpideGeometry::GetSensorVolumePath(Int_t iD)
             layertype++;
         }
 
-        sprintf(nameVolume, "/cave_1/VCWorld_0/Multilayer_%i_%i/Alpide_%i", bartype, layertype, sid);
+        sprintf(nameVolume, "/cave_1/TargetChamberWorld_0/Multilayer_%i_%i/Alpide_%i", bartype, layertype, sid);
     }
     else
     {

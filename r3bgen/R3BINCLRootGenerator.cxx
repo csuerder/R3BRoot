@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -99,10 +99,8 @@ bool R3BINCLRootGenerator::ReadEvent(FairPrimaryGenerator* primGen)
     }
 
     bool validevent = false;
-
     while (!validevent)
     {
-
         Tree->GetEntry(fEvt);
 
         if (fOnlyFission)
@@ -146,13 +144,17 @@ bool R3BINCLRootGenerator::ReadEvent(FairPrimaryGenerator* primGen)
                 validevent = false;
             }
         }
+        else
+        {
+            validevent = true;
+        }
 
         if (fEvt > fEvtRoot)
         {
-            LOG(ERROR)
+            LOG(error)
                 << "\033[5m\033[31m R3BINCLRootGenerator: Number of simulated events larger than the ones contained "
                    "in the Root file \033[0m ";
-            LOG(WARNING)
+            LOG(warn)
                 << "\033[5m\033[33m R3BINCLRootGenerator: Please, provide a new Root file with more events \033[0m ";
             return kTRUE;
         }
@@ -231,7 +233,7 @@ void R3BINCLRootGenerator::RegisterIons()
                 if (ions.find(pdg) == ions.end())
                 {
                     const Double_t mass = G4NistManager::Instance()->GetIsotopeMass(iZ, iA) / CLHEP::GeV;
-                    LOG(DEBUG) << "R3BINCLRootGenerator: New ion " << iZ << "\t" << iA << "\t" << mass;
+                    LOG(debug) << "R3BINCLRootGenerator: New ion " << iZ << "\t" << iA << "\t" << mass;
                     ions[pdg] = new FairIon(TString::Format("Ion_%d_%d", iA, iZ), iZ, iA, iZ, 0., mass);
                 }
             }

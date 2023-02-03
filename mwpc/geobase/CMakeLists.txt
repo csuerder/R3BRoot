@@ -1,6 +1,6 @@
 ##############################################################################
 #   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    #
-#   Copyright (C) 2019 Members of R3B Collaboration                          #
+#   Copyright (C) 2019-2023 Members of R3B Collaboration                     #
 #                                                                            #
 #             This software is distributed under the terms of the            #
 #                 GNU General Public Licence (GPL) version 3,                #
@@ -15,7 +15,7 @@ cmake_minimum_required(VERSION 3.0)
 
 if(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_0.geo.root")
 message(STATUS "Starting to generate the standard root geometry for the MWPC0")
-execute_process(COMMAND root -l ${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc0_geo.C)
+execute_process(COMMAND root -l -q -x ${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc0_geo.C)
 message(STATUS "${BYellow}MWPC0 standard root geometry has been created${CR} ")
 else(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_0.geo.root")
 message(STATUS "${BYellow}MWPC0 standard root geometry already created${CR} ")
@@ -23,7 +23,7 @@ endif(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_0.geo.root")
 
 if(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_1.geo.root")
 message(STATUS "Starting to generate the standard root geometry for the MWPC1")
-execute_process(COMMAND root -l "${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc1and2_geo.C(1)")
+execute_process(COMMAND root -l -q -x "${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc1and2_geo.C(1)")
 message(STATUS "${BYellow}MWPC1 standard root geometry has been created${CR} ")
 else(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_1.geo.root")
 message(STATUS "${BYellow}MWPC1 standard root geometry already created${CR} ")
@@ -31,7 +31,7 @@ endif(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_1.geo.root")
 
 if(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_2.geo.root")
 message(STATUS "Starting to generate the standard root geometry for the MWPC2")
-execute_process(COMMAND root -l "${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc1and2_geo.C(2)")
+execute_process(COMMAND root -l -q -x "${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc1and2_geo.C(2)")
 message(STATUS "${BYellow}MWPC2 standard root geometry has been created${CR} ")
 else(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_2.geo.root")
 message(STATUS "${BYellow}MWPC2 standard root geometry already created${CR} ")
@@ -40,7 +40,7 @@ endif(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_2.geo.root")
 if(WITH_SOFIA)
 if(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_3.geo.root")
 message(STATUS "Starting to generate the standard root geometry for the MWPC3")
-execute_process(COMMAND root -l ${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc3_geo.C)
+execute_process(COMMAND root -l -q -x ${R3BROOT_SOURCE_DIR}/mwpc/geobase/create_mwpc3_geo.C)
 message(STATUS "${BYellow}MWPC3 standard root geometry has been created${CR} ")
 else(NOT EXISTS "${R3BROOT_SOURCE_DIR}/geometry/mwpc_3.geo.root")
 message(STATUS "${BYellow}MWPC3 standard root geometry already created${CR} ")

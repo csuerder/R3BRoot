@@ -1,6 +1,6 @@
 /******************************************************************************
  *   Copyright (C) 2019 GSI Helmholtzzentrum für Schwerionenforschung GmbH    *
- *   Copyright (C) 2019 Members of R3B Collaboration                          *
+ *   Copyright (C) 2019-2023 Members of R3B Collaboration                     *
  *                                                                            *
  *             This software is distributed under the terms of the            *
  *                 GNU General Public Licence (GPL) version 3,                *
@@ -64,7 +64,7 @@ R3BAlpideOnlineSpectra::R3BAlpideOnlineSpectra(const TString& name, Int_t iVerbo
 }
 
 // Virtual R3BAlpideOnlineSpectra::Destructor
-R3BAlpideOnlineSpectra::~R3BAlpideOnlineSpectra() { R3BLOG(DEBUG1, ""); }
+R3BAlpideOnlineSpectra::~R3BAlpideOnlineSpectra() { R3BLOG(debug, ""); }
 
 void R3BAlpideOnlineSpectra::SetParContainers()
 {
@@ -90,12 +90,12 @@ InitStatus R3BAlpideOnlineSpectra::Init()
 {
     R3BLOG(info, "");
     FairRootManager* mgr = FairRootManager::Instance();
-    R3BLOG_IF(FATAL, NULL == mgr, "FairRootManager not found");
+    R3BLOG_IF(fatal, NULL == mgr, "FairRootManager not found");
 
     header = (R3BEventHeader*)mgr->GetObject("EventHeader.");
     if (!header)
     {
-        R3BLOG(warning, "EventHeader. not found");
+        R3BLOG(warn, "EventHeader. not found");
         header = (R3BEventHeader*)mgr->GetObject("R3BEventHeader");
     }
     else
@@ -110,10 +110,10 @@ InitStatus R3BAlpideOnlineSpectra::Init()
     R3BLOG_IF(fatal, NULL == fMappedItems, "AlpideMappedData not found");
 
     fCalItems = (TClonesArray*)mgr->GetObject("AlpideCalData");
-    R3BLOG_IF(warning, NULL == fCalItems, "AlpideCalData not found");
+    R3BLOG_IF(warn, NULL == fCalItems, "AlpideCalData not found");
 
     fHitItems = (TClonesArray*)mgr->GetObject("AlpideHitData");
-    R3BLOG_IF(warning, NULL == fHitItems, "AlpideHitData not found");
+    R3BLOG_IF(warn, NULL == fHitItems, "AlpideHitData not found");
 
     // MAIN FOLDER-ALPIDE
     TFolder* mainfol = new TFolder("ALPIDE", "Alpide info");
